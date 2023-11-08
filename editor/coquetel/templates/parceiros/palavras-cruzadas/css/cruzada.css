@@ -1,0 +1,672 @@
+/*
+azul estadão:   #006194
+barra estadão:  #393b41
+*/
+
+@font-face {
+  font-family: "Flama";
+  src: url("../fonts/Flama-Book-webfont.eot");
+  src: url("../fonts/Flama-Book-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Flama-Book-webfont.woff2") format("woff2"), url("../fonts/Flama-Book-webfont.woff") format("woff"), url("../fonts/Flama-Book-webfont.ttf") format("truetype"), url("../fonts/Flama-Book-webfont.svg#flamaboook") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Flama";
+  src: url("../fonts/Flama-Bold-webfont.eot");
+  src: url("../fonts/Flama-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Flama-Bold-webfont.woff2") format("woff2"), url("../fonts/Flama-Bold-webfont.woff") format("woff"), url("../fonts/Flama-Bold-webfont.ttf") format("truetype"), url("../fonts/Flama-Bold-webfont.svg#flamabold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body{
+	width:100%; height: 100%;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family: 'Flama', Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  line-height: 2.8rem;
+  overflow: hidden;
+	max-width: 100%;
+}
+
+.numeric{
+	clear:right;
+}
+
+#page{
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+#puzzleContainer{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 720px;
+	margin: 130px auto 280px auto;
+  padding: 0 10px;
+  /*overflow:hidden;*/
+  clear:both;
+  z-index:10;
+
+  transition: margin 0.3s;
+  -moz-transition: margin 0.3s;
+  -webkit-transition: margin 0.3s;
+}
+#puzzleContainer.alert{
+  margin: 170px auto 0px auto;
+}
+
+body.zoomed #puzzleContainer{
+  height: 200%;
+}
+
+#puzzleHolder{
+	position: relative;
+	width: 100%;
+	margin: 0;
+  padding: 0;
+	clear:both;
+	z-index:10;
+  top:0; left:0;
+  overflow: hidden;
+  margin-bottom:200px;
+
+  -ms-transform-origin: 0% 0%; /* IE 9 */
+  -webkit-transform-origin: 0% 0%; /* Chrome, Safari, Opera */
+  transform-origin: 0% 0%;
+}
+
+body.zoomed #puzzleHolder{
+  transform: scale(2);
+  -moz-transform: scale(2);
+  -webkit-transform: scale(2);
+}
+
+#puzzleHolder img.crosswords{
+  width: 100%;
+  height: auto;
+	position: absolute;
+}
+
+#puzzleInputs, #puzzleAnswers{
+	position:absolute;
+	width: 100%;
+	max-width: 100%;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:1.5rem;
+  font-weight: 400;
+	overflow:hidden;
+  margin-bottom:200px;
+
+  /*
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  -mozilla-flex-direction: row;
+  */
+}
+
+#puzzleInputs{
+	z-index:8;
+}
+
+#puzzleAnswers{
+	display:none;
+	z-index:7;
+}
+
+#copyright{
+  width: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+  position: absolute;
+  bottom:5px;
+  color: #666;
+}
+
+#copyright span.dev{
+  display: inline-block;
+  float: left;
+  text-align: left;
+  margin-right: 2px;
+}
+
+#copyright span.logoCopy{
+  float: right;
+  text-align: right;
+  margin-right: 2px;
+}
+
+#copyright span.logoCopy img{
+  width: 25px;
+  opacity: 0.3;
+  position: relative;
+  vertical-align:top;
+}
+
+body.zoomed #copyright{
+  /*margin-bottom: 40px;*/
+}
+
+.title{
+	margin: 0 auto 0 auto;
+  position: fixed;
+  width: 100%;
+  top:0;
+  text-align: left;
+  padding: 2rem 0 0 0;
+  z-index: 1000;
+  background: #e7e7e7;
+  border-bottom: 1px solid #dedede;
+  box-shadow: 0 3px 24px rgba(0,0,0,0.1);
+}
+.title h1{
+  font-family: 'Flama', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+	padding:0; margin:0;
+	text-transform:uppercase;
+  margin: 1.2rem 0 0 0;
+  float: left;
+  font-size: 3.2rem;
+  max-width: 340px;
+  line-height: 1.3;
+  overflow: hidden;
+
+  transition: max-height 0.3s;
+  -moz-transition: max-height 0.3s;
+  -webkit-transition: max-height 0.3s;
+}
+
+.title .topBt{
+  overflow: hidden;
+  margin: 0 0.5rem 0 0.5rem;
+  width: 280px;
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.title .intro {
+  display: block;
+  line-height: 60px;
+	color: #000;
+  text-align: right;
+	font-weight: normal;
+	letter-spacing: 0.01em;
+	margin: 0 auto 0 auto;
+  width: 100%;
+  max-width: 720px;
+  overflow: hidden;
+}
+
+.title .intro p{
+  line-height: 1.3;
+  width: calc(100% - 250px);
+  max-width: 340px;
+  margin: 0;
+  text-align: left;
+  float: left;
+  clear: left;
+}
+
+.first{
+	float:left;
+	clear:left;
+}
+
+.puzzleField{
+  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border:none;
+	font-size: 2.5rem;
+  font-weight: normal;
+	text-align:center;
+  line-height: 6.5rem;
+	display:block;
+	float:left;
+	color: #222;
+	opacity: 0.9;
+	background-color:transparent;
+	text-shadow: 2px 2px rgba(255,255,255,0.4);
+}
+.puzzleField.wrongAnswer{
+	background-color:rgb(255,247,216);
+	background-color:rgba(255,225,100,0.2);
+}
+.puzzleField.highlighted{
+	background-color:rgb(215,235,255);
+	background-color:rgba(121,187,255,0.2);
+}
+.puzzleField.current{
+	background-color:rgb(200,225,255);
+	background-color:rgba(121,187,255,0.5);
+}
+.box{
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:1rem;
+	text-align:center;
+	color: #333;
+	display:block;
+	float:left;
+}
+.puzzleField.half1, .puzzleField.half2{
+  /*margin-top:0.1rem;*/
+	font-size: 1.8rem;
+  line-height: 4.5rem;
+}
+
+#alertBox{
+	background-color:#ccc;
+	width: 100%;
+	padding:0 15px;
+	line-height:1.2;
+  font-weight: normal;
+	/*box-shadow: 0px 0px 0px 6pt rgba(0,0,0,0.1);*/
+	color:#333;
+	text-align:left;
+  margin-top: 2rem;
+
+	border-radius:3px;
+	-o-border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	max-height: 0;
+	z-index:0;
+  overflow: hidden;
+
+  /*
+	position:absolute;
+  top: 50%;
+	left: 50%;
+
+  transform: translate(-50%, -55%);
+  -moz-transform: translate(-50%, -55%);
+  -webkit-transform: translate(-50%, -55%);
+
+  -ms-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  */
+
+  transition: max-height 0.3s;
+  -moz-transition: max-height 0.3s;
+  -webkit-transition: max-height 0.3s;
+}
+
+#alertBox.visible{
+  max-height: 100px;
+}
+
+#alertContent{
+	padding:10px;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+#closeButton {
+  background: #fff;
+	border-radius:3px;
+	-o-border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	text-indent:0;
+	border:1px solid #ccc;
+	display:inline-block;
+	color:#333;
+	font-size:1.5rem;
+	font-weight:normal;
+	font-style:normal;
+	line-height:24px;
+	text-decoration:none;
+	text-align:center;
+	margin: 0 auto 0.5rem auto;
+  border:none;
+  display: block;
+  width: 5rem;
+  padding: 0.15rem 0.15rem;
+}
+
+#closeButton:hover {
+	background-color:#4197ee;
+}
+
+#timeCounter{
+  display: inline-block;
+  width: calc(100% - 220px);
+  margin: 0 2px;
+  font-size: 1.35rem;
+  line-height: 2rem;
+  vertical-align: middle;
+  padding-bottom: 0rem;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+
+#timeCounter span{
+  font-weight: normal;
+  letter-spacing: 0;
+  font-size: 1.3rem;
+}
+
+#btCheck:focus,
+#btCheck:active,
+#btClear:focus,
+#btClear:active {
+  background-color: #d3d3d3;
+  outline: none;
+}
+
+#btCheck {
+  width: 85px;
+}
+#btClear {
+  width: 75px;
+}
+
+#btCheck, #btClear, #btZoom {
+  background-color: #fff;
+	border-radius:4px;
+	-o-border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+  -webkit-appearance: none;
+
+	text-indent:0;
+	display:inline-block;
+	color:#333;
+	font-weight:normal;
+	font-style:normal;
+	text-decoration:none;
+	text-align:center;
+	letter-spacing:1px;
+	padding: 0.4rem 1rem;
+
+  font-family: 'Flama', Helvetica, Arial, sans-serif;
+	font-size:1.6rem;
+	margin-right:0.2rem;
+	vertical-align: bottom;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid #d3d3d3;
+  line-height: 3rem;
+}
+
+#btZoom:focus,
+#btZoom:active {
+  outline: none;
+}
+
+#btZoom{
+  float: none;
+  margin: 3px 0 0 0;
+  display: none;
+  width: 40px;
+  background: transparent url('../images/zoom-icons.svg') no-repeat -40px center;
+  background-size: auto 40px;
+  border: 0;
+  background-color: #d3d3d3;
+}
+#btZoom.hidden{
+  display:none;
+}
+
+body.zoomed #btZoom{
+  background-position: 0px center;
+}
+
+#keyboardContainer{
+	position: fixed;
+  bottom: -360px;
+	width: 100%;
+	background: #e7e7e7;
+	padding: 20px 20px 20px 10px;
+	z-index:100;
+	box-shadow: 0 -3px 24px rgba(0,0,0,0.1);
+	margin: 0 auto;
+  font-weight: normal;
+
+  -ms-transform-origin: 0% 100%; /* IE 9 */
+  -webkit-transform-origin: 0% 100%; /* Chrome, Safari, Opera */
+  transform-origin: 0% 100%;
+}
+
+#keyboardContainer.open{
+  bottom:0;
+}
+
+#keyboard{
+	display:block;
+	position: relative;
+	overflow: hidden;
+	list-style: none;
+	margin:0 auto 0 auto;
+  padding:0;
+	width: 100%;
+	max-width: 720px;
+}
+
+#keyboard li{
+	display:block;
+	width: calc(10%);
+	float: left;
+	padding: 3px;
+  min-height: 42px;
+	cursor: pointer;
+}
+
+#keyboard li:hover,
+#keyboard li:focus{
+  background-color: #d3d3d3;
+}
+
+#keyboard li.sp1, #keyboard li.sp2{
+	width: calc(5%);
+}
+
+#keyboard li.sp3, #keyboard li.delete{
+	width: calc(15%);
+}
+
+#keyboard li span{
+	display:block;
+	border-radius: 5px;
+	padding: 10px 2px;
+	background-color: #fff;
+	text-align: center;
+	font-size: 21px;
+  min-height: 42px;
+	line-height: 24px;
+	text-transform: uppercase;
+}
+
+#keyboard li.sp1 span, #keyboard li.sp2 span{
+  height: 100%;
+	background-color: #f8f8f8;
+	cursor: default;
+}
+
+#keyboard li.delete span{
+	background: #fff url('../images/backspace.svg') center no-repeat;
+	background-size: 20px auto;
+}
+
+#keyboard li.hide span{
+	background: #fff url('../images/keyboard.png') center no-repeat;
+	background-size: 30px auto;
+}
+
+#keyboard li span:active{
+	background-color: #eee;
+}
+
+#keyboard li.sp1 span:active, #keyboard li.sp2 span:active,
+#keyboard li.sp3 span:active{
+	background-color: #f8f8f8;
+}
+
+@media screen and (max-width:720px){
+	body{
+		/*font-size: 1.4rem;*/
+	}
+}
+
+@media screen and (max-width:720px){
+	body{
+		font-size: 1.3rem;
+	}
+  .title{
+    width: 100%;
+    padding: 0;
+    line-height: 8rem;
+  }
+  .title h1{
+		font-size: 2rem;
+    max-height: 0;
+  }
+  .title h1.alert{
+    max-height: 100px;
+  }
+  .title .topBt{
+    width: 210px;
+  }
+  .title .intro p,
+  .title .intro h1{
+    width: 100%;
+    max-width: 280px;
+  }
+  .title .intro,
+  .title .topBt{
+    width: 100%;
+    display: block;
+    float: left;
+    margin: 1rem auto 0 auto;
+    font-size: 1.25rem;
+    text-align:left;
+  }
+  .title .intro{
+    margin: 0 auto 1.5rem auto;
+    padding: 0 4%;
+  }
+  /*
+  .title .intro,
+  .title .topBt{
+    width: 100%;
+    display: block;
+    float: left;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 1.35rem;
+    text-align:left;
+  }
+  .title .intro{
+    margin: 0 auto 10px auto;
+  }
+  .title .intro p{
+    display: block;
+    margin: 3px 0;
+    padding: 0;
+    float: none;
+    max-width: 280px;
+  }
+  .title .topBt{
+    width: 100%;
+  }*/
+	#btClear, #btCheck, #btZoom{
+		font-size: 1.5rem;
+		float:none;
+		display: inline-block;
+  	padding: 0.2em 0.8em;
+  }
+  #btZoom{
+    display:inline-block;
+    float: right;
+  }
+
+	#keyboard li{
+		display:block;
+		width: calc(10%);
+		float: left;
+		padding: 2px;
+	}
+
+	#keyboard li span{
+    height: 36px;
+    line-height: 18px;
+		min-height: 36px;
+	}
+
+  #puzzleContainer{
+    margin: 100px auto 200px auto;
+  }
+  #puzzleContainer.alert{
+    margin: 170px auto 200px auto;
+  }
+
+	.puzzleField{
+		font-size:1.5rem;
+    line-height: 3rem;
+	}
+  .puzzleField.half1, .puzzleField.half2{
+    /*margin-top:0.1rem;*/
+  	font-size: 1.35rem;
+    line-height: 2.5rem;
+  }
+}
+
+#horizOverlay{
+  display: none;
+  background: #fff;
+  z-index:10000000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+}
+#horizOverlay p{
+  display: block;
+  position: absolute;
+  width: 100%;
+  max-width: 240px;
+  top: 40%;
+  left: 50%;
+  text-align: center;
+  font-size: 1.7rem;
+
+  transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+@media screen and (max-height:400px) and (orientation: landscape) {
+  #horizOverlay{
+    display: block;
+  }
+}

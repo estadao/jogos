@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" />
+
+    <title>Sudoku</title>
+
+    <meta name="author" content="Estadão" />
+    <meta name="description" content="Jogue a cruzada do dia no desktop ou no seu dispositivo móvel" />
+
+    <meta property="fb:app_id" content="268068763366373" />
+    <meta property="og:title" content="Cruzadas - Estadão" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="Jogue o sudoku do dia no desktop ou em seu dispositivo móvel" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Estadão" />
+    <meta property="og:url" content="https://infograficos.estadao.com.br/jogos/" />
+    <meta property="og:image" content="https://infograficos.estadao.com.br/jogos/images/sudoku.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="css/sudoku.css?v=19.9">
+
+  </head>
+
+	<body>
+
+    <div class="title">
+      <div class="intro">
+        <h1 class="alert">Sudoku</h1>
+
+        <div class="topBt">
+            <input type="button" id="btCheck" name="check" value="conferir" />
+            <input type="button" id="btClear" name="clear" value="limpar" />
+            <input type="button" id="btZoom" name="zoom" value="" />
+            <div id="timeCounter">Tempo<br><span>00:00:00</span></div>
+        </div>
+      </div>
+
+      <div id="alertBox">
+          <div id="alertContent">
+          Toque uma vez para preencher na horizontal, duas vezes para preencher na vertical
+          </div>
+          <!--<a id="closeButton" href="#">ok</a>-->
+      </div>
+    </div>
+
+    <div id="page" class="site">
+
+      <div id="puzzleContainer">
+        <div id="puzzleHolder">
+          <div id="puzzleAnswers"></div>
+          <div id="puzzleInputs"></div>
+          <img class="crosswords" src="images/sudoku.jpg" />
+
+          <div id="copyright">
+            <span class="logoCopy">
+              <img src="images/logo-coquetel.jpg" alt="© COQUETEL" />
+            </span>
+            <span class="dev">© Revistas COQUETEL / Desenvolvimento: ESTADÃO
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="keyboardContainer">
+      <ul id="keyboard">
+          <li class="key l1"><span>1</span></li>
+          <li class="key l2"><span>2</span></li>
+          <li class="key l3"><span>3</span></li>
+          <li class="key l4"><span>4</span></li>
+          <li class="key l5"><span>5</span></li>
+          <li class="key l6"><span>6</span></li>
+          <li class="key l7"><span>7</span></li>
+          <li class="key l8"><span>8</span></li>
+          <li class="key l9"><span>9</span></li>
+          <li class="key l0"><span>0</span></li>
+          <li class="delete"><span></span></li>
+      </ul>
+    </div>
+
+    <div id="horizOverlay">
+      <p>Para jogar, coloque o aparelho na vertical</p>
+    </div>
+
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/sudoku.js?v=19.9"></script>
+
+    <!-- Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-166963-4', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+	</body>
+</html>
